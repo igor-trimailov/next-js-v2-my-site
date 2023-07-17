@@ -1,12 +1,40 @@
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
+import Header from "@/components/Header";
+import { Suspense } from "react";
+import Loader from "@/components/Loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+// this happens on the server
+const getData = async () => {
+    // we did not define any caching strategy, meaning that this will be cached on the client as static data
+    // implying that it will never change
+    const data = await fetch("https://www.reddit.com/.json", {
+        // to opt out of the default:
+        // cache: "no-store" // always fetch it, never cache it, don't store
+    });
+
+    return data.json();
+};
+
+// not the "async"!!!
+// this is new and only works on server components
+// it will not work if you change it to client component
+// server side fetching, not exposed to the client at all, this is very cool...
+export default async function Home() {
+    const data = await getData();
+
+    const postTitle = data.data.children[0].data.title;
+
     return (
         <main className={styles.main}>
+            <h1>{postTitle}</h1>
+            <Suspense fallback={<Loader />}>
+                <Header />
+            </Suspense>
+
             <div className={styles.description}>
                 <p>
                     Get started by editing&nbsp;

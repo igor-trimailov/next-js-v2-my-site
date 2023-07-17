@@ -1,4 +1,5 @@
 import "./globals.css";
+import "../styles/global.css";
 
 export default function RootLayout({
     children,
@@ -7,6 +8,13 @@ export default function RootLayout({
 }) {
     // this is where navbars and shared components go to
     // children can have their own loayouts, so you can get nested layouts
+
+    // is there a way to override parent layout?
+    // yes
+
+    // template? (don't use it)
+    // template refreshes always when the route changes: useful for animations
+    // layout is static, does not refresh
     return (
         <html lang="en">
             {/*

@@ -1,0 +1,5 @@
+/* scoped css module */
+.button {
+    outline: none;
+    border: 1px solid red;
+}
