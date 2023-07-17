@@ -1,4 +1,3 @@
-import "./globals.css";
 import "../styles/global.css";
 
 export default function RootLayout({
@@ -23,7 +22,6 @@ export default function RootLayout({
       */}
             <head />
             <body>
-                <div>Root Layout</div>
                 <div>{children}</div>
             </body>
         </html>
